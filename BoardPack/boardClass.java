@@ -56,7 +56,6 @@ public class boardClass {
 
     public static void main(String[] args)
     {
-        pieceClass testPiece = new PieceClass();
 
 
         boardClass gameBoard = new boardClass();
