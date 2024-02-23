@@ -2,7 +2,7 @@ package BoardPack;
 
 import java.lang.String;
 
-import javax.print.attribute.standard.Sides;
+// import javax.print.attribute.standard.Sides;
 
 public class boardClass {
     private final int SIZE = 8;
@@ -45,11 +45,24 @@ public class boardClass {
         }
     }
 
+    public void setPiece(int row, int col, String name){
+
+        grid[row][col] = name;
+
+    }
+
+    public void movePiece(){}
+
 
     public static void main(String[] args)
     {
+        pieceClass testPiece = new PieceClass();
+
+
         boardClass gameBoard = new boardClass();
         gameBoard.displayBoard();
+
+
 
     }
 
