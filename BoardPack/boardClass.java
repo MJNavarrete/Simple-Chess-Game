@@ -9,7 +9,7 @@ public class boardClass {
     private String[][] grid;
     
     
-    public boardClass(){
+    public boardClass(){ // Sets up the board with hashtags for initial board display
 
         grid = new String[SIZE][SIZE];
 
@@ -25,7 +25,7 @@ public class boardClass {
 
     }
 
-    public void displayBoard() {
+    public void displayBoard() { // displays the board
         System.out.print("  ");
         for (char letter = 'a'; letter <= 'h'; letter++) {
             System.out.print(letter + " ");
@@ -45,13 +45,13 @@ public class boardClass {
         }
     }
 
-    public void setPiece(int row, int col, String name){
+    public void setPiece(int row, int col, String name){ // Sets the position of a piece and the name in the board
 
         grid[row][col] = name;
 
     }
 
-    public void movePiece(int oldRow, int oldCol, int newRow, int newCol, String pieceName){
+    public void movePiece(int oldRow, int oldCol, int newRow, int newCol, String pieceName){ // moves the piece on the board and deletes the old position off the board
 
         grid[oldRow][oldCol] = "#";
         grid[newRow][newCol] = pieceName;
