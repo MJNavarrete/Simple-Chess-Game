@@ -51,7 +51,13 @@ public class boardClass {
 
     }
 
-    public void movePiece(){}
+    public void movePiece(int oldRow, int oldCol, int newRow, int newCol, String pieceName){
+
+        grid[oldRow][oldCol] = "#";
+        grid[newRow][newCol] = pieceName;
+
+
+    }
 
 
     public static void main(String[] args)
@@ -61,8 +67,8 @@ public class boardClass {
         boardClass gameBoard = new boardClass();
         gameBoard.displayBoard();
 
-
-
     }
 
 }
+
+// Make the method to move a piece to a spot and erase the existence of it in the original spot
