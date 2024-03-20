@@ -4,11 +4,18 @@ import java.lang.String;
 
 // import javax.print.attribute.standard.Sides;
 
+/**
+ * The `boardClass` class represents the chessboard and its operations.
+ * It provides methods to initialize the board, display it, set a piece on the board,
+ * and move a piece from one position to another.
+ */
 public class boardClass {
     private final int SIZE = 8;
     private String[][] grid;
     
-    
+    /**
+     * Initializes the chess board with '#' characters representing empty squares.
+     */
     public boardClass(){ // Sets up the board with hashtags for initial board display
 
         grid = new String[SIZE][SIZE];
@@ -25,6 +32,10 @@ public class boardClass {
 
     }
 
+    /**
+     * Displays the current state of the chess board.
+     * The rows are labeled with numbers, and columns are labeled with letters.
+     */
     public void displayBoard() { // displays the board
         System.out.print("  ");
         for (char letter = 'a'; letter <= 'h'; letter++) {
@@ -45,12 +56,29 @@ public class boardClass {
         }
     }
 
+    /**
+     * Sets the specified piece at the given position on the board.
+     *
+     * @param row The row index of the position.
+     * @param col The column index of the position.
+     * @param name The name or symbol of the piece to be set.
+     */
     public void setPiece(int row, int col, String name){ // Sets the position of a piece and the name in the board
 
         grid[row][col] = name;
 
     }
 
+    /**
+     * Moves a piece from its old position to a new position on the board.
+     * The piece at the old position is removed ('#'), and the new position is updated with the piece's name.
+     *
+     * @param oldRow The row index of the old position.
+     * @param oldCol The column index of the old position.
+     * @param newRow The row index of the new position.
+     * @param newCol The column index of the new position.
+     * @param pieceName The name or symbol of the piece being moved.
+     */
     public void movePiece(int oldRow, int oldCol, int newRow, int newCol, String pieceName){ // moves the piece on the board and deletes the old position off the board
 
         grid[oldRow][oldCol] = "#";
@@ -59,7 +87,11 @@ public class boardClass {
 
     }
 
-
+    /**
+     * The main method creates an instance of `boardClass` and displays the initial state of the board.
+     *
+     * @param args Command-line arguments (unused).
+     */
     public static void main(String[] args)
     {
 

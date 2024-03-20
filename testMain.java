@@ -3,7 +3,16 @@ import PiecesPack.BasePiece;
 import java.util.Scanner;
 
 
+/**
+ * The `testMain` class contains the main method to test the chess board and pieces functionality.
+ */
+
 public class testMain {
+    /**
+     * The main method creates instances of the board and pieces, sets up the board, moves a piece, and displays the board.
+     *
+     * @param args Command-line arguments (unused).
+     */
     
     public static void main (String[] args)
     {
