@@ -13,6 +13,14 @@ public class BasePiece {
 
     }
 
+    public void setRow(int row){
+        this.row = row;
+    }
+
+    public void setCol(int col){
+        this.col = col;
+    }
+
     public int getRow(){ // getter for the row of the piece
 
         return this.row;

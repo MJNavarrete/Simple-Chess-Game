@@ -1,16 +1,18 @@
 import BoardPack.boardClass;
 import PiecesPack.BasePiece;
+import java.util.Scanner;
 
 
 public class testMain {
     
     public static void main (String[] args)
     {
-        
-        boardClass gameBoard = new boardClass(); // makes a new instance of the board
-        gameBoard.displayBoard(); // displays the board to make sure it works
+        Scanner scnr = new Scanner(System.in);
+        boolean flag = false;
 
-        BasePiece testPiece = new BasePiece(0,0,null); // makes a new base piece and sets name
+        boardClass gameBoard = new boardClass(); // makes a new instance of the board
+
+        BasePiece testPiece = new BasePiece(0,0,"Jeff"); // makes a new base piece and sets name
 
         int testRow = testPiece.getRow(); // gets row of piece
         int testCol = testPiece.getCol(); // gets col of piece
@@ -20,9 +22,85 @@ public class testMain {
 
         gameBoard.displayBoard(); // displays board to show that the piece was added
 
-        gameBoard.movePiece(testCol, testCol, 7, 7, testName); // moves the piece, from old to new
+
+        do{
+
+            int prevRow = testPiece.getRow();
+            int prevCol = testPiece.getCol();
+
+            System.out.println("Please input a move for the piece to do or type x0 to quit: ");
+            String userIn = scnr.next();
+
+            char rowChar = userIn.charAt(1);
+            char colChar = userIn.charAt(0);
+
+            int rowInt = Character.getNumericValue(rowChar);
+            char usableCol = Character.toLowerCase(colChar);
+
+        
+
+        int finalCol = 0;
+        
+        switch (usableCol){
+
+            case 'a':
+                finalCol = 0;
+                break;
+
+            case 'b':
+                finalCol = 1;
+                break;
+            
+            case 'c':
+                finalCol = 2;
+                break;
+
+            case 'd':
+                finalCol = 3;
+                break;
+
+            case 'e':
+                finalCol = 4;
+                break;
+
+            case 'f':
+                finalCol = 5;
+                break;
+
+            case 'g':
+                finalCol = 6;
+                break;
+
+            case 'h':
+                finalCol = 7;
+                break;
+
+            case 'x':
+                flag = true;
+
+            default:
+                break;
+
+
+
+        }
+
+        gameBoard.movePiece(prevRow, prevCol, rowInt, finalCol, testName); // moves the piece, from old to new
+
+        testPiece.setRow(rowInt);
+        testPiece.setCol(finalCol);
+        
 
         gameBoard.displayBoard(); // displays the board again
 
+        } while(flag != true);
+
+
+
+
+        scnr.close();
+
     }
 }
+
+// TODO:
