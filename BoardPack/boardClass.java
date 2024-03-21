@@ -2,6 +2,8 @@ package BoardPack;
 
 import java.lang.String;
 
+// import PiecesPack.BasePiece;
+
 // import javax.print.attribute.standard.Sides;
 
 /**
@@ -86,6 +88,24 @@ public class boardClass {
 
 
     }
+
+    // public BasePiece locatePieceAt(BasePiece[] arr, int col, int row){
+
+    //     for(BasePiece piece : arr)
+    //     {
+    //         if(piece.getCol() == col && piece.getRow() == row)
+    //         {
+    //             return piece;
+
+    //         }
+
+    //     }
+
+
+
+    // }
+
+
 
     /**
      * The main method creates an instance of `boardClass` and displays the initial state of the board.

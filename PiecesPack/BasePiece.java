@@ -22,9 +22,9 @@ public class BasePiece {
 
 
     public BasePiece(int row, int col, String pieceName){ // constructor for a piece
-        this.row = 0;
-        this.col = 0;
-        this.pieceName = "Test";
+        this.row = row;
+        this.col = col;
+        this.pieceName = pieceName;
 
     }
 
@@ -75,5 +75,108 @@ public class BasePiece {
         return this.pieceName;
     }
 
+    /**
+     * 
+     * Calculates the column to move the piece to given a char input from the user
+     * 
+     * @param colChar the char that the user inputs 
+     * @return the integer associated with the grid converted from the char the user input
+     */
+    public int calcCol(char colChar){
+        int finalCol = 0;
+        switch (colChar){
+
+            case 'a':
+                finalCol = 0;
+                break;
+
+            case 'b':
+                finalCol = 1;
+                break;
+            
+            case 'c':
+                finalCol = 2;
+                break;
+
+            case 'd':
+                finalCol = 3;
+                break;
+
+            case 'e':
+                finalCol = 4;
+                break;
+
+            case 'f':
+                finalCol = 5;
+                break;
+
+            case 'g':
+                finalCol = 6;
+                break;
+
+            case 'h':
+                finalCol = 7;
+                break;
+
+            default:
+                break;
+        }
+
+        return finalCol;
+
+    }
+
+
+    /**
+     *  Just does a simple conversion to the actual position on the board given a user's input
+     * 
+     * 
+     * @param row row integer that the user inputs 
+     * @return the integer once converted to actual position on board
+     */
+    public int calcRow(int row){
+        int finalRow = 0;
+        switch (row){
+
+            case 1:
+                finalRow = 7;
+                break;
+
+            case 2:
+                finalRow = 6;
+                break;
+            
+            case 3:
+                finalRow = 5;
+                break;
+
+            case 4:
+                finalRow = 4;
+                break;
+
+            case 5:
+                finalRow = 3;
+                break;
+
+            case 6:
+                finalRow = 2;
+                break;
+
+            case 7:
+                finalRow = 1;
+                break;
+
+            case 8:
+                finalRow = 0;
+                break;
+
+            default:
+                break;
+        }
+
+        return finalRow;
+
+
+    }
 
 }  
