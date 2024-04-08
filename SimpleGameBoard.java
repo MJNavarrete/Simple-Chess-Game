@@ -1,4 +1,3 @@
-
 //All of the needed packages for use in the gameboard are here. Some of these are .*, which means that all of the contents of the package are imported but not all of them are used. This however was present in the example code so I'll just leave it
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -7,7 +6,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-// Class for the game board. Name for the class is the same as the coding example and don't need to change it.
+/**
+ * Class for the game board. 
+ * Name for the class is the same as the coding example and don't need to change it.
+ */
 public class SimpleGameBoard {
 
     // Private variables that are used in the methods of the function
@@ -17,12 +19,19 @@ public class SimpleGameBoard {
     private JPanel selectedPiece = null;
     private String[][] board = new String[ROWS][COLS];
 
-    // Main function that is used to call an instance of the game board
+    /**
+     * Main function that is used to call an instance of the game board.
+     *
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new SimpleGameBoard().createAndShowGUI());
     }
 
-    // The main method for setting up the game board, adding the panels to the gameboard JPanel 2d-array and setting it all visible.
+    /**
+     * The main method for setting up the game board, 
+     * adding the panels to the gameboard JPanel 2d-array and setting it all visible.
+     */
     private void createAndShowGUI() {
         JFrame frame = new JFrame("Simple Game Board with Multiple Pieces");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,9 +60,10 @@ public class SimpleGameBoard {
         frame.setVisible(true);
     }
 
-
-    // Method to add all of the piece to the board on top of the panels within the board.
-    // Unicode is there to represent the chess pieces
+    /**
+     * Method to add all of the piece to the board on top of the panels within the board.
+     * Unicode is there to represent the chess pieces.
+     */
     private void setupGamePieces() {
 
         //White               King      Queen     wrook    bishop    knight     pawn
@@ -84,7 +94,6 @@ public class SimpleGameBoard {
 
                 gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.GRAY));
                 gameBoardSquares[i][j].add(square);
-                
                 }
             }
 
@@ -136,15 +145,17 @@ public class SimpleGameBoard {
                     gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.RED));
 
                 }
-
             }
             //sets the other rows in the board to black "" Strings
             board[i] = new String[] {"", "" , "", "", "", "" , "", ""};
-
         }
     }
 
-    // Handle mouse click method to handle when the user clicks on the board.
+    /**
+     * Handle mouse click method to handle when the user clicks on the board.
+     *
+     * @param clickedPanel The panel that was clicked
+     */
     private void handleMouseClick(JPanel clickedPanel) {
         Color pieceColor = ((LineBorder)clickedPanel.getBorder()).getLineColor();
 
@@ -164,14 +175,16 @@ public class SimpleGameBoard {
             movePiece(selectedPiece, clickedPanel);
             selectedPiece = null;
 
-        }
-            
+        } 
         return;
-       
-
     }
 
-    // Method to actually mvoe the unicode pieces on the board. Takes in a from and a to panel so that we can remove everything from the 'from' panel and move it to the 'to' panel
+    /**
+     * Method to actually move the unicode pieces on the board. Takes in a from and a to panel so that we can remove everything from the 'from' panel and move it to the 'to' panel.
+     *
+     * @param from The panel to move the piece from
+     * @param to   The panel to move the piece to
+     */
     private void movePiece(JPanel from, JPanel to) {
         JLabel piece = (JLabel) from.getComponent(0);
         from.setBorder(BorderFactory.createLineBorder(Color.RED));
