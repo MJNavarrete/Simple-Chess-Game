@@ -5,6 +5,10 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import PiecesPack.BasePiece;
+import BoardPack.boardClass;
+import java.lang.String;
+
 
 /**
  * Class for the game board. 
@@ -18,6 +22,7 @@ public class SimpleGameBoard {
     private final JPanel[][] gameBoardSquares = new JPanel[ROWS][COLS];
     private JPanel selectedPiece = null;
     private String[][] board = new String[ROWS][COLS];
+    private boardClass gameBoard = new boardClass();
 
     /**
      * Main function that is used to call an instance of the game board.
@@ -94,6 +99,63 @@ public class SimpleGameBoard {
 
                 gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.GRAY));
                 gameBoardSquares[i][j].add(square);
+
+
+                switch(j){
+
+                    case 0:
+                        BasePiece testPiece0 = new BasePiece(i,j,"BR"); // Makes a new pawn and sets it to current location matching GUI
+                        String testName0 = testPiece0.getName();
+                        gameBoard.setPiece(i, j, testName0);
+                        break;
+
+                    case 1:
+                        BasePiece testPiece1 = new BasePiece(i,j,"BH"); // Makes a new pawn and sets it to current location matching GUI
+                        String testName1 = testPiece1.getName();
+                        gameBoard.setPiece(i, j, testName1);
+                        break;
+
+                    case 2:
+                        BasePiece testPiece2 = new BasePiece(i,j,"BB"); // Makes a new pawn and sets it to current location matching GUI
+                        String testName2 = testPiece2.getName();
+                        gameBoard.setPiece(i, j, testName2);
+                        break;
+
+                    case 3: 
+                        BasePiece testPiece3 = new BasePiece(i,j,"BQ"); // Makes a new pawn and sets it to current location matching GUI
+                        String testName3 = testPiece3.getName();
+                        gameBoard.setPiece(i, j, testName3);
+                        break;
+
+                    case 4:
+                        BasePiece testPiece4 = new BasePiece(i,j,"BK"); // Makes a new pawn and sets it to current location matching GUI
+                        String testName4 = testPiece4.getName();
+                        gameBoard.setPiece(i, j, testName4);
+                        break;
+
+                    case 5:
+                        BasePiece testPiece5 = new BasePiece(i,j,"BB"); // Makes a new pawn and sets it to current location matching GUI
+                        String testName5 = testPiece5.getName();
+                        gameBoard.setPiece(i, j, testName5);
+                        break;
+
+                    case 6:
+
+                        BasePiece testPiece6 = new BasePiece(i,j,"BH"); // Makes a new pawn and sets it to current location matching GUI
+                        String testName6 = testPiece6.getName();
+                        gameBoard.setPiece(i, j, testName6);
+                        break;
+
+                    case 7:
+                        BasePiece testPiece7 = new BasePiece(i,j,"BR"); // Makes a new pawn and sets it to current location matching GUI
+                        String testName7 = testPiece7.getName();
+                        gameBoard.setPiece(i, j, testName7);
+                        break;
+
+                    default:
+                        break;
+                
+                    }
                 }
             }
 
@@ -108,6 +170,11 @@ public class SimpleGameBoard {
     
                     gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.GRAY));
                     gameBoardSquares[i][j].add(square);
+
+                    BasePiece testPiece = new BasePiece(i,j,"BP"); // Makes a new pawn and sets it to current location matching GUI
+                    String testName = testPiece.getName();
+                    gameBoard.setPiece(i, j, testName);
+
                 }       
             }
 
@@ -122,6 +189,10 @@ public class SimpleGameBoard {
     
                     gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.GRAY));
                     gameBoardSquares[i][j].add(square);
+
+                    BasePiece testPiece = new BasePiece(i,j,"WP"); // Makes a new pawn and sets it to current location matching GUI
+                    String testName = testPiece.getName();
+                    gameBoard.setPiece(i, j, testName);
                 }       
             }
 
@@ -136,6 +207,62 @@ public class SimpleGameBoard {
     
                     gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.GRAY));
                     gameBoardSquares[i][j].add(square);
+
+                    switch(j){
+
+                        case 0:
+                            BasePiece testPiece0 = new BasePiece(i,j,"WR"); // Makes a new pawn and sets it to current location matching GUI
+                            String testName0 = testPiece0.getName();
+                            gameBoard.setPiece(i, j, testName0);
+                            break;
+    
+                        case 1:
+                            BasePiece testPiece1 = new BasePiece(i,j,"WH"); // Makes a new pawn and sets it to current location matching GUI
+                            String testName1 = testPiece1.getName();
+                            gameBoard.setPiece(i, j, testName1);
+                            break;
+    
+                        case 2:
+                            BasePiece testPiece2 = new BasePiece(i,j,"WB"); // Makes a new pawn and sets it to current location matching GUI
+                            String testName2 = testPiece2.getName();
+                            gameBoard.setPiece(i, j, testName2);
+                            break;
+    
+                        case 3: 
+                            BasePiece testPiece3 = new BasePiece(i,j,"WQ"); // Makes a new pawn and sets it to current location matching GUI
+                            String testName3 = testPiece3.getName();
+                            gameBoard.setPiece(i, j, testName3);
+                            break;
+    
+                        case 4:
+                            BasePiece testPiece4 = new BasePiece(i,j,"WK"); // Makes a new pawn and sets it to current location matching GUI
+                            String testName4 = testPiece4.getName();
+                            gameBoard.setPiece(i, j, testName4);
+                            break;
+    
+                        case 5:
+                            BasePiece testPiece5 = new BasePiece(i,j,"WB"); // Makes a new pawn and sets it to current location matching GUI
+                            String testName5 = testPiece5.getName();
+                            gameBoard.setPiece(i, j, testName5);
+                            break;
+    
+                        case 6:
+    
+                            BasePiece testPiece6 = new BasePiece(i,j,"WH"); // Makes a new pawn and sets it to current location matching GUI
+                            String testName6 = testPiece6.getName();
+                            gameBoard.setPiece(i, j, testName6);
+                            break;
+    
+                        case 7:
+                            BasePiece testPiece7 = new BasePiece(i,j,"WR"); // Makes a new pawn and sets it to current location matching GUI
+                            String testName7 = testPiece7.getName();
+                            gameBoard.setPiece(i, j, testName7);
+                            break;
+    
+                        default:
+                            break;
+                    
+                    }
                 }       
             }
 
@@ -149,6 +276,8 @@ public class SimpleGameBoard {
             //sets the other rows in the board to black "" Strings
             board[i] = new String[] {"", "" , "", "", "", "" , "", ""};
         }
+
+        gameBoard.displayBoard();
     }
 
     /**

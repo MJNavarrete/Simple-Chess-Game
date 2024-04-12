@@ -25,7 +25,7 @@ public class testMain {
 
         BasePiece testPiece = new BasePiece(0,0,"J"); // makes a new base piece and sets name
 
-        pieces.add(testPiece);
+        // pieces.add(testPiece);
 
         int testRow = testPiece.getRow(); // gets row of piece
         int testCol = testPiece.getCol(); // gets col of piece
