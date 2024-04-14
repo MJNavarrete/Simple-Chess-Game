@@ -4,7 +4,7 @@ package PiecesPack;
 public class Pawn extends BasePiece{
     //private String color;
 
-    public Pawn(int row, int col, String pieceName){
-        super(row, col, pieceName);
+    public Pawn(int row, int col, String color, String pieceName){
+        super(row, col, color, pieceName);
     }
 }

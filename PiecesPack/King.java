@@ -4,7 +4,7 @@ package PiecesPack;
 public class King extends BasePiece{
     //private String color;
 
-    public King(int row, int col, String pieceName){
-        super(row, col, pieceName);
+    public King(int row, int col, String color, String pieceName){
+        super(row, col, color, pieceName);
     }
 }

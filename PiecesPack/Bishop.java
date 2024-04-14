@@ -4,7 +4,7 @@ package PiecesPack;
 public class Bishop extends BasePiece{
     //private String color;
 
-    public Bishop(int row, int col, String pieceName){
-        super(row, col, pieceName);
+    public Bishop(int row, int col, String color, String pieceName){
+        super(row, col, color, pieceName);
     }
 }

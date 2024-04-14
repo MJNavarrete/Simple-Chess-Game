@@ -9,6 +9,7 @@ public class BasePiece {
     private int row; // row of the piece
     private int col; // column of the piece
     private String pieceName; // identifier of the piece
+    private String color; //color of piece
 
 
 
@@ -18,13 +19,15 @@ public class BasePiece {
      * @param row The initial row of the piece.
      * @param col The initial column of the piece.
      * @param pieceName The identifier/name of the piece.
+     * @param color The color of thge piece
      */
 
 
-    public BasePiece(int row, int col, String pieceName){ // constructor for a piece
+    public BasePiece(int row, int col, String color, String pieceName){ // constructor for a piece
         this.row = row;
         this.col = col;
         this.pieceName = pieceName;
+        this.color = color;
 
     }
 
@@ -37,6 +40,7 @@ public class BasePiece {
         this.row = row;
     }
 
+
     /**
      * Sets the current column of the piece.
      *
@@ -44,6 +48,15 @@ public class BasePiece {
      */
     public void setCol(int col){
         this.col = col;
+    }
+
+    /**
+     * Sets the color of the piece.
+     *
+     * @return None
+     */
+    public void setColor(String color){
+        this.color = color;
     }
 
     /**
@@ -66,6 +79,15 @@ public class BasePiece {
     }
 
     /**
+     * Retreives the color of the piece.
+     *
+     * @return The color of the piece
+     */
+    public String getColor(){
+        return this.color;
+    }
+
+    /**
      * Retrieves the name/identifier of the piece.
      *
      * @return The name/identifier of the piece.
@@ -81,7 +103,7 @@ public class BasePiece {
      * 
      * @param colChar the char that the user inputs 
      * @return the integer associated with the grid converted from the char the user input
-     */
+     
     public int calcCol(char colChar){
         int finalCol = 0;
         switch (colChar){
@@ -125,6 +147,7 @@ public class BasePiece {
         return finalCol;
 
     }
+    */
 
 
     /**
@@ -133,7 +156,6 @@ public class BasePiece {
      * 
      * @param row row integer that the user inputs 
      * @return the integer once converted to actual position on board
-     */
     public int calcRow(int row){
         int finalRow = 0;
         switch (row){
@@ -178,5 +200,6 @@ public class BasePiece {
 
 
     }
+    */
 
 }  

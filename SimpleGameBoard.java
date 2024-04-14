@@ -1,10 +1,22 @@
-//All of the needed packages for use in the gameboard are here. Some of these are .*, which means that all of the contents of the package are imported but not all of them are used. This however was present in the example code so I'll just leave it
+//All of the needed packages for use in the gameboard are here. Some of these are .*, which means 
+//that all of the contents of the package are imported but not all of them are used. This however 
+//was present in the example code so I'll just leave it
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import BoardPack.boardClass;
+import PiecesPack.BasePiece;
+import PiecesPack.Bishop;
+import PiecesPack.King;
+import PiecesPack.Pawn;
+import PiecesPack.Queen;
+import PiecesPack.Rook;
+import PiecesPack.Knight;
+
 
 /**
  * Class for the game board. 
@@ -61,97 +73,80 @@ public class SimpleGameBoard {
     }
 
     /**
-     * Method to add all of the piece to the board on top of the panels within the board.
-     * Unicode is there to represent the chess pieces.
+     * The setupGamePieces() method creates Piece objects for each piece on the board and adds them 
+     * to the appropriate squares using the addPieceToSquare() method.
      */
     private void setupGamePieces() {
 
-        //White               King      Queen     wrook    bishop    knight     pawn
-        // String[] test = ["\u2654", "\u2655", "\u2656", "\u2657", "\u2658", "\u2659"];
-
-        //Black
-        // String[] test2 = ["\u265A", "\u265B", "\u265C", "\u265D", "\u265E", "\u265F"];
-
-        // Preset back and front rows for the black and white pieces
-        String[] wbackrow = {"\u2656", "\u2658", "\u2657", "\u2654", "\u2655",  "\u2657", "\u2658","\u2656"};
-        String[] wfrontrow = {"\u2659", "\u2659", "\u2659", "\u2659","\u2659", "\u2659", "\u2659", "\u2659"};
-
-        String[] bbackrow = {"\u265C","\u265E","\u265D","\u265A","\u265B","\u265D","\u265E","\u265C"};
-        String[] bfrontrow = {"\u265F","\u265F","\u265F","\u265F","\u265F","\u265F","\u265F","\u265F"};
-
-
-        // For loop that will iterate through the rows and each time it hits a significant row value, it will stop and loop through each col and replace the section there with unicode for a game piece
-        for(int i = 0; i < ROWS; i++){
-
-            // Signifies the first row of the board in terms of the array, which is the furthest row form the white player
-            if(i == 0){
-                for(int j = 0; j < bbackrow.length; j++){
-                board[i][j] = bbackrow[j];
-                JLabel square = new JLabel(bbackrow[j]);
-                square.setFont(new Font("Serif", Font.BOLD, 32)); // Make the piece characters bigger
-                square.setHorizontalAlignment(JLabel.CENTER);
-                square.setVerticalAlignment(JLabel.CENTER);
-
-                gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.GRAY));
-                gameBoardSquares[i][j].add(square);
-                }
+            // Add pawns
+            for (int i = 0; i < COLS; i++) {
+                addPieceToSquare(new Pawn(1, i,"Black", "Pawn"), 1, i);
+                addPieceToSquare(new Pawn(6, i, "White", "Pawn"), 6, i);
             }
-
-            // Signifies the front row of the black player side 
-            else if(i == 1){
-                for(int j = 0; j < bfrontrow.length; j++){
-                    board[i][j] = bfrontrow[j];
-                    JLabel square = new JLabel(bfrontrow[j]);
-                    square.setFont(new Font("Serif", Font.BOLD, 32)); // Make the piece characters bigger
-                    square.setHorizontalAlignment(JLabel.CENTER);
-                    square.setVerticalAlignment(JLabel.CENTER);
     
-                    gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.GRAY));
-                    gameBoardSquares[i][j].add(square);
-                }       
-            }
+            // Add other pieces
+            addPieceToSquare(new Rook(0, 0, "Black", "Rook"), 0, 0);
+            addPieceToSquare(new Rook(0, 7, "Black", "Rook"), 0, 7);
+            addPieceToSquare(new Rook(7, 0, "White", "Rook"), 7, 0);
+            addPieceToSquare(new Rook(7, 7, "White", "Rook"), 7, 7);
+            addPieceToSquare(new Knight(0, 1, "Black", "Knight"), 0, 1);
+            addPieceToSquare(new Knight(0, 6, "Black", "Knight"), 0, 6);
+            addPieceToSquare(new Knight(7, 1, "White", "Knight"), 7, 1);
+            addPieceToSquare(new Knight(7, 6, "White", "Knight"), 7, 6);
+            addPieceToSquare(new Bishop(0, 2, "Black", "Bishop"), 0, 2);
+            addPieceToSquare(new Bishop(0, 5, "Black", "Bishop"), 0, 5);
+            addPieceToSquare(new Bishop(7, 2, "White", "Bishop"), 7, 2);
+            addPieceToSquare(new Bishop(7, 5, "White", "Bishop"), 7, 5);
+            addPieceToSquare(new Queen(0, 3, "Black", "Queen"), 0, 3);
+            addPieceToSquare(new Queen(7, 3, "White", "Queen"), 7, 3);
+            addPieceToSquare(new King(0, 4, "Black", "King"), 0, 4);
+            addPieceToSquare(new King(7, 4, "White", "King"), 7, 4);
 
-            // Signifies the front row for the white player
-            else if(i == 6){
-                for(int j = 0; j < wfrontrow.length; j++){
-                    board[i][j] = wfrontrow[j];
-                    JLabel square = new JLabel(wfrontrow[j]);
-                    square.setFont(new Font("Serif", Font.BOLD, 32)); // Make the piece characters bigger
-                    square.setHorizontalAlignment(JLabel.CENTER);
-                    square.setVerticalAlignment(JLabel.CENTER);
-    
-                    gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.GRAY));
-                    gameBoardSquares[i][j].add(square);
-                }       
-            }
-
-            // Signifies the back row for the white player
-            else if(i == 7){
-                for(int j = 0; j < wbackrow.length; j++){
-                    board[i][j] = wbackrow[j];
-                    JLabel square = new JLabel(wbackrow[j]);
-                    square.setFont(new Font("Serif", Font.BOLD, 32)); // Make the piece characters bigger
-                    square.setHorizontalAlignment(JLabel.CENTER);
-                    square.setVerticalAlignment(JLabel.CENTER);
-    
-                    gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.GRAY));
-                    gameBoardSquares[i][j].add(square);
-                }       
-            }
-
-            // Sets the borders of the blank spaces to red for the handleMouseClick method
-            else {
-                for(int j = 0; j < wbackrow.length; j++){
-                    gameBoardSquares[i][j].setBorder(BorderFactory.createLineBorder(Color.RED));
-
-                }
-            }
-            //sets the other rows in the board to black "" Strings
-            board[i] = new String[] {"", "" , "", "", "", "" , "", ""};
-        }
     }
 
     /**
+     * he addPieceToSquare() method now takes a Piece object as an argument and displays the corresponding 
+     * Unicode character for the piece using the getPieceUnicode() method.
+     * @param piece
+     * @param row
+     * @param col
+     */
+    private void addPieceToSquare(BasePiece piece, int row, int col) {
+        JLabel pieceLabel = new JLabel(getPieceUnicode(piece.getName(), piece.getColor()));
+        pieceLabel.setFont(new Font("Serif", Font.PLAIN, 50)); // Set font size as needed
+        JPanel square = gameBoardSquares[row][col];
+        square.add(pieceLabel);
+    }
+
+    /**
+     * This method checks the color of the pawns and assigns dthe correct unicode representation for it to
+     * be displayed on the board by using the addPieceToSquare() method.
+     * @param type
+     * @param color
+     * @return
+     */
+    private String getPieceUnicode(String type, String color) {
+        // Add more cases for different piece types and colors
+        switch (type) {
+            case "Pawn":
+                return color.equals("Black") ? "\u265F" : "\u2659";
+            case "Rook":
+                return color.equals("Black") ? "\u265C" : "\u2656";
+            case "Knight":
+                return color.equals("Black") ? "\u265E" : "\u2658";
+            case "Bishop":
+                return color.equals("Black") ? "\u265D" : "\u2657";
+            case "Queen":
+                return color.equals("Black") ? "\u265B" : "\u2655";
+            case "King":
+                return color.equals("Black") ? "\u265A" : "\u2654";
+            // Add cases for other piece types
+            default:
+                return "";
+        }
+    }
+
+     /**
      * Handle mouse click method to handle when the user clicks on the board.
      *
      * @param clickedPanel The panel that was clicked

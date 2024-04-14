@@ -4,7 +4,7 @@ package PiecesPack;
 public class Rook extends BasePiece{
     //private String color;
 
-    public Rook(int row, int col, String pieceName){
-        super(row, col, pieceName);
+    public Rook(int row, int col, String color, String pieceName){
+        super(row, col, color, pieceName);
     }
 }

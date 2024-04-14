@@ -1,3 +1,4 @@
+/*
 import BoardPack.boardClass;
 import PiecesPack.BasePiece;
 import java.util.Scanner;
@@ -7,14 +8,19 @@ import java.util.ArrayList;
 /**
  * The `testMain` class contains the main method to test the chess board and pieces functionality.
  */
-
+/*
 public class testMain {
+
+    /**Creation of two player initialized to corresponding letters
+    private final Player player1 = new Player('X');
+    private final Player player2 = new Player('O');
+    private Player currentPlayer = player1;
     /**
      * The main method creates instances of the board and pieces, sets up the board, moves a piece, and displays the board.
      *
      * @param args Command-line arguments (unused).
      */
-    
+    /*
     public static void main (String[] args)
     {
         Scanner scnr = new Scanner(System.in);
@@ -77,5 +83,4 @@ public class testMain {
 
     }
 }
-
-// TODO:
+*/
