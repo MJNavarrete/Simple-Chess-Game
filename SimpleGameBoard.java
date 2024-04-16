@@ -3,12 +3,9 @@
 //was present in the example code so I'll just leave it
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import BoardPack.boardClass;
 import PiecesPack.BasePiece;
 import PiecesPack.Bishop;
 import PiecesPack.King;
@@ -28,8 +25,8 @@ public class SimpleGameBoard {
     private static final int ROWS = 8;
     private static final int COLS = 8;
     private final JPanel[][] gameBoardSquares = new JPanel[ROWS][COLS];
-    private JPanel selectedPiece = null;
-    private String[][] board = new String[ROWS][COLS];
+    private BasePiece[][] board = new BasePiece[ROWS][COLS];
+    private JPanel selectedSquare = null;
 
     /**
      * Main function that is used to call an instance of the game board.
@@ -37,7 +34,52 @@ public class SimpleGameBoard {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new SimpleGameBoard().createAndShowGUI());
+        SwingUtilities.invokeLater(() -> new SimpleGameBoard().ChessGame());
+    }
+
+    /**
+     * Calls the methods to create and show the GUI of the board and initialize the board
+     * with pieces.
+     */
+    public void ChessGame() {
+        initializeBoard();
+        createAndShowGUI();
+    }
+
+    /**
+     * Initializes the board with pieces in their starting positions
+     */
+    private void initializeBoard() {
+        board[0][0] = new Rook(Color.BLACK);
+        board[0][1] = new Knight(Color.BLACK);
+        board[0][2] = new Bishop(Color.BLACK);
+        board[0][3] = new Queen(Color.BLACK);
+        board[0][4] = new King(Color.BLACK);
+        board[0][5] = new Bishop(Color.BLACK);
+        board[0][6] = new Knight(Color.BLACK);
+        board[0][7] = new Rook(Color.BLACK);
+
+        board[7][0] = new Rook(Color.WHITE);
+        board[7][1] = new Knight(Color.WHITE);
+        board[7][2] = new Bishop(Color.WHITE);
+        board[7][3] = new Queen(Color.WHITE);
+        board[7][4] = new King(Color.WHITE);
+        board[7][5] = new Bishop(Color.WHITE);
+        board[7][6] = new Knight(Color.WHITE);
+        board[7][7] = new Rook(Color.WHITE);
+
+         //for loop to initialize pawns to starting positions
+        for (int col = 0; col < COLS; col++) {
+            board[1][col] = new Pawn(Color.BLACK);
+            board[6][col] = new Pawn(Color.WHITE);
+        }
+
+        // Fill the rest of the board with empty spaces
+        for (int row = 2; row < 6; row++) {
+            for (int col = 0; col < COLS; col++) {
+                board[row][col] = null;
+            }
+        }
     }
 
     /**
@@ -45,151 +87,142 @@ public class SimpleGameBoard {
      * adding the panels to the gameboard JPanel 2d-array and setting it all visible.
      */
     private void createAndShowGUI() {
-        JFrame frame = new JFrame("Simple Game Board with Multiple Pieces");
+        JFrame frame = new JFrame("Chess Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridLayout(ROWS, COLS));
-        frame.setSize(500, 500);
-
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLS; j++) {
-                JPanel panel = new JPanel();
-                panel.setBackground((i + j) % 2 == 0 ? Color.CYAN : Color.WHITE); //Change cyan and white to different colors for different board colors
-                panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                panel.addMouseListener(new MouseAdapter() {
+    
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                JPanel square = new JPanel();
+                square.setBackground((row + col) % 2 == 0 ? Color.CYAN : Color.GRAY);
+                square.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    
+                // Add the piece representation (ASCII Piece symbol) to the square if 
+                //there is a piece at that position.
+                if (board[row][col] != null) {
+                    square.add(board[row][col].getPieceRepresentation());
+                }
+    
+                square.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        handleMouseClick(panel);
+                        handleSquareClick(square);
                     }
                 });
-                gameBoardSquares[i][j] = panel;
-                frame.add(panel);
+                gameBoardSquares[row][col] = square;
+                frame.add(square);
             }
         }
-
-        setupGamePieces();
-
+    
         frame.pack();
         frame.setVisible(true);
     }
 
-    /**
-     * The setupGamePieces() method creates Piece objects for each piece on the board and adds them 
-     * to the appropriate squares using the addPieceToSquare() method.
-     */
-    private void setupGamePieces() {
 
-            // Add pawns
-            for (int i = 0; i < COLS; i++) {
-                addPieceToSquare(new Pawn(1, i,"Black", "Pawn"), 1, i);
-                addPieceToSquare(new Pawn(6, i, "White", "Pawn"), 6, i);
-            }
-    
-            // Add other pieces
-            addPieceToSquare(new Rook(0, 0, "Black", "Rook"), 0, 0);
-            addPieceToSquare(new Rook(0, 7, "Black", "Rook"), 0, 7);
-            addPieceToSquare(new Rook(7, 0, "White", "Rook"), 7, 0);
-            addPieceToSquare(new Rook(7, 7, "White", "Rook"), 7, 7);
-            addPieceToSquare(new Knight(0, 1, "Black", "Knight"), 0, 1);
-            addPieceToSquare(new Knight(0, 6, "Black", "Knight"), 0, 6);
-            addPieceToSquare(new Knight(7, 1, "White", "Knight"), 7, 1);
-            addPieceToSquare(new Knight(7, 6, "White", "Knight"), 7, 6);
-            addPieceToSquare(new Bishop(0, 2, "Black", "Bishop"), 0, 2);
-            addPieceToSquare(new Bishop(0, 5, "Black", "Bishop"), 0, 5);
-            addPieceToSquare(new Bishop(7, 2, "White", "Bishop"), 7, 2);
-            addPieceToSquare(new Bishop(7, 5, "White", "Bishop"), 7, 5);
-            addPieceToSquare(new Queen(0, 3, "Black", "Queen"), 0, 3);
-            addPieceToSquare(new Queen(7, 3, "White", "Queen"), 7, 3);
-            addPieceToSquare(new King(0, 4, "Black", "King"), 0, 4);
-            addPieceToSquare(new King(7, 4, "White", "King"), 7, 4);
-
-    }
-
-    /**
-     * he addPieceToSquare() method now takes a Piece object as an argument and displays the corresponding 
-     * Unicode character for the piece using the getPieceUnicode() method.
-     * @param piece
-     * @param row
-     * @param col
-     */
-    private void addPieceToSquare(BasePiece piece, int row, int col) {
-        JLabel pieceLabel = new JLabel(getPieceUnicode(piece.getName(), piece.getColor()));
-        pieceLabel.setFont(new Font("Serif", Font.PLAIN, 50)); // Set font size as needed
-        JPanel square = gameBoardSquares[row][col];
-        square.add(pieceLabel);
-    }
-
-    /**
-     * This method checks the color of the pawns and assigns dthe correct unicode representation for it to
-     * be displayed on the board by using the addPieceToSquare() method.
-     * @param type
-     * @param color
-     * @return
-     */
-    private String getPieceUnicode(String type, String color) {
-        // Add more cases for different piece types and colors
-        switch (type) {
-            case "Pawn":
-                return color.equals("Black") ? "\u265F" : "\u2659";
-            case "Rook":
-                return color.equals("Black") ? "\u265C" : "\u2656";
-            case "Knight":
-                return color.equals("Black") ? "\u265E" : "\u2658";
-            case "Bishop":
-                return color.equals("Black") ? "\u265D" : "\u2657";
-            case "Queen":
-                return color.equals("Black") ? "\u265B" : "\u2655";
-            case "King":
-                return color.equals("Black") ? "\u265A" : "\u2654";
-            // Add cases for other piece types
-            default:
-                return "";
-        }
-    }
 
      /**
      * Handle mouse click method to handle when the user clicks on the board.
      *
      * @param clickedPanel The panel that was clicked
      */
-    private void handleMouseClick(JPanel clickedPanel) {
-        Color pieceColor = ((LineBorder)clickedPanel.getBorder()).getLineColor();
+    private void handleSquareClick(JPanel square) {
+        if (selectedSquare == null) {
+            selectedSquare = square;
+        } else {
+            // Check if the clicked square is the same as the selected square
+            if (square == selectedSquare) {
+                return; // Do nothing if the same square is clicked again
+            }
+    
+            // Perform the move
+            int fromRow = getRow(selectedSquare);
+            int fromCol = getCol(selectedSquare);
+            int toRow = getRow(square);
+            int toCol = getCol(square);
 
-        // If the border that the user clicks on in not one of the borders representing the piece colors and the space is null, then it doesn't allow the move.
-        if(pieceColor == Color.RED && selectedPiece == null){
-            return;
+    
+                // Check if the move is valid
+            if (isValidMove(fromRow, fromCol, toRow, toCol)) {
+                // Move the piece visually
+                JLabel pieceLabel = (JLabel) selectedSquare.getComponent(0);
+                square.removeAll();
+                square.add(pieceLabel);
+                selectedSquare.removeAll();
+                selectedSquare.add(new JLabel()); // Empty the selected square
+                selectedSquare.repaint();
+                square.repaint();
 
+                // Move the piece in the board array
+                BasePiece piece = board[fromRow][fromCol];
+                board[fromRow][fromCol] = null;
+                board[toRow][toCol] = piece;
+            }
+            else {
+                // Show a message for invalid move
+                JOptionPane.showMessageDialog(null, "Invalid Move! Please try again.");
+            }
+
+            selectedSquare = null;
         }
-        
-        // if the selected piece is null, then we set the border of the selected square to blue to signify selection and then we set the selected piece to the clicked panel
-        if(selectedPiece == null){
-            clickedPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-            selectedPiece = clickedPanel;
-                
-        // If the selected piece is already selected, then we call the move piece method and set the selected piece back to null for future use.
-        } else{
-            movePiece(selectedPiece, clickedPanel);
-            selectedPiece = null;
-
-        } 
-        return;
+    }
+    
+    /**
+     * This method iterates over the gameBoardSquares array to find the row index of the square 
+     * JPanel. It checks each element of the array to see if it matches the square parameter. If 
+     * a match is found, it returns the row index. If no match is found, it returns -1.
+     * @param square
+     * @return
+     */
+    private int getRow(JPanel square) {
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col <COLS; col++) {
+                if (gameBoardSquares[row][col] == square) {
+                    return row;
+                }
+            }
+        }
+        return -1;
     }
 
     /**
-     * Method to actually move the unicode pieces on the board. Takes in a from and a to panel so that we can remove everything from the 'from' panel and move it to the 'to' panel.
-     *
-     * @param from The panel to move the piece from
-     * @param to   The panel to move the piece to
+     * This method is similar to getRow, but it returns the column index of the square JPanel 
+     * instead. It iterates over the array and checks each element for a match with the square 
+     * parameter. If a match is found, it returns the column index. If no match is found, it returns -1.
+     * @param square
+     * @return
      */
-    private void movePiece(JPanel from, JPanel to) {
-        JLabel piece = (JLabel) from.getComponent(0);
-        from.setBorder(BorderFactory.createLineBorder(Color.RED));
-        from.removeAll();
-        to.removeAll();
-        to.add(piece);
-        to.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        from.revalidate();
-        to.revalidate();
-        from.repaint();
-        to.repaint();
+    private int getCol(JPanel square) {
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                if (gameBoardSquares[row][col] == square) {
+                    return col;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Checks if the move of a piece is valid.
+     */
+    private boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol) {
+        BasePiece piece = board[fromRow][fromCol];
+        if (piece == null) {
+            return false; // No piece at the starting position
+        }
+
+        // Check if the destination is within the board bounds
+        if (toRow < 0 || toRow >= board.length || toCol < 0 || toCol >= board[0].length) {
+            return false;
+        }
+
+        // Check if there's a piece of the same color at the destination
+        BasePiece destinationPiece = board[toRow][toCol];
+        if (destinationPiece != null && destinationPiece.getColor() == piece.getColor()) {
+            return false;
+        }
+
+        // Check if the move is valid according to the piece's rules
+        return piece.isValidMove(board, fromRow, fromCol, toRow, toCol);
     }
 }
