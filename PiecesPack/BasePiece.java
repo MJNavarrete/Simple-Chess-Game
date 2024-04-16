@@ -1,101 +1,66 @@
 package PiecesPack;
 
-/**
- * The `BasePiece` class represents a basic chess piece with a position and a name.
- * It serves as the base class for specific types of chess pieces.
- */
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JLabel;
 
-public class BasePiece {
-    private int row; // row of the piece
-    private int col; // column of the piece
-    private String pieceName; // identifier of the piece
-    private String color; //color of piece
-
-
+ /**
+  * BasePiece an abstract class due to the use of abstract method isValidMove being 
+  * different for each piece (subclass)
+  */
+public abstract class BasePiece {
+    //Added new variables for tracking the color and the symbol of the pieces in
+    //order to correctly represent them on the board
+    private final Color color;
+    private final char symbol;
 
     /**
-     * Constructs a new BasePiece with the given initial position and name.
-     *
-     * @param row The initial row of the piece.
-     * @param col The initial column of the piece.
-     * @param pieceName The identifier/name of the piece.
-     * @param color The color of thge piece
+     * Constructor setting the piece's color and symbol. The symbol is the ascii representation
+     * of the piece which is decided in the subclass of the piece.
+     * @param color
+     * @param symbol
      */
-
-
-    public BasePiece(int row, int col, String color, String pieceName){ // constructor for a piece
-        this.row = row;
-        this.col = col;
-        this.pieceName = pieceName;
+    public BasePiece(Color color, char symbol) {
         this.color = color;
-
+        this.symbol = symbol;
     }
 
     /**
-     * Sets the current row of the piece.
-     *
-     * @return None
+     * This method returns a JLabel that visually represents the chess piece. It sets the text 
+     * of the label to the Unicode symbol of the piece and sets the foreground color and font 
+     * to make it visually distinguishable on the board.
+     * @return
      */
-    public void setRow(int row){
-        this.row = row;
-    }
-
-
-    /**
-     * Sets the current column of the piece.
-     *
-     * @return None
-     */
-    public void setCol(int col){
-        this.col = col;
+    public JLabel getPieceRepresentation() {
+        JLabel label = new JLabel(Character.toString(symbol));
+        label.setForeground(color);
+        label.setFont(new Font("Serif", Font.BOLD, 40));
+        return label;
     }
 
     /**
-     * Sets the color of the piece.
-     *
-     * @return None
+     * Abstract method called to check if a piece's move is valid according to it's own rules.
+     * Determined by the position of the piece on the board and where the piece is moving to; The
+     * parameters of this function are self explanitory.
+     * @param board 
+     * @param fromRow
+     * @param fromCol
+     * @param toRow
+     * @param toCol
+     * @return
      */
-    public void setColor(String color){
-        this.color = color;
-    }
-
+    public abstract boolean isValidMove(BasePiece[][] board, int fromRow, int fromCol, int toRow, int toCol);
+    
     /**
-     * Retrieves the current row of the piece.
-     *
-     * @return The current row of the piece.
+     * accessor for the color of the piece. Returns the color.
+     * @return
      */
-    public int getRow(){ // getter for the row of the piece
-
-        return this.row;
+    public Color getColor() {
+        return color;
     }
+}
 
-    /**
-     * Retrieves the current column of the piece.
-     *
-     * @return The current column of the piece.
-     */
-    public int getCol(){ // getter for the column of the piece
-        return this.col;
-    }
-
-    /**
-     * Retreives the color of the piece.
-     *
-     * @return The color of the piece
-     */
-    public String getColor(){
-        return this.color;
-    }
-
-    /**
-     * Retrieves the name/identifier of the piece.
-     *
-     * @return The name/identifier of the piece.
-     */
-    public String getName(){ // gets the piece name which is also the identifier for the piece on the board
-
-        return this.pieceName;
-    }
+    //Below is the code no longer used for our updated game (Delete if you want to)
 
     /**
      * 
@@ -200,6 +165,4 @@ public class BasePiece {
 
 
     }
-    */
-
-}  
+    */ 
