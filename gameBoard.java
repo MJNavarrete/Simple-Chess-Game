@@ -21,11 +21,15 @@ import PiecesPack.Knight;
  */
 public class gameBoard {
 
-    // Private variables that are used in the methods of the function
+    // Private variables that are used in the methods of our class
     private static final int ROWS = 8;
     private static final int COLS = 8;
     private final JPanel[][] gameBoardSquares = new JPanel[ROWS][COLS];
+    //2D array of BasePiece objects representing the pieces on the chessboard. 
+    //Each element of this array corresponds to a square on the chessboard
     private BasePiece[][] board = new BasePiece[ROWS][COLS];
+    //This variable holds a reference to the currently selected square on 
+    //the chessboard. It is initially set to null when no square is selected.
     private JPanel selectedSquare = null;
 
     /**
@@ -126,6 +130,8 @@ public class gameBoard {
      * @param clickedPanel The panel that was clicked
      */
     public void handleSquareClick(JPanel square) {
+        //If selectedSquare is currently null, it assigns the value of square 
+        //to selectedSquare. e.g. square is clicked for the first time.
         if (selectedSquare == null) {
             selectedSquare = square;
         } else {

@@ -5,10 +5,10 @@ import java.awt.Color;
 
 public class Knight extends BasePiece{
     
-    //ternary operator (condition ? trueValue : falseValue). It checks if the color is Color.BLACK. 
-    //If it is, it sets the Unicode character for a black piece ('unicode'); otherwise, 
-    //it sets the Unicode character for a white piece ('unicode').
     public Knight(Color color) {
+        //ternary operator (condition ? trueValue : falseValue). It checks if the color is Color.BLACK. 
+        //If it is, it sets the Unicode character for a black piece ('unicode'); otherwise, 
+        //it sets the Unicode character for a white piece ('unicode').
         super(color, color == Color.BLACK ? '\u265E' : '\u2658');
     }
 

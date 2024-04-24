@@ -5,10 +5,10 @@ import java.awt.Color;
 
 public class King extends BasePiece{
     
-    //ternary operator (condition ? trueValue : falseValue). It checks if the color is Color.BLACK. 
-    //If it is, it sets the Unicode character for a black piece ('unicode'); otherwise, 
-    //it sets the Unicode character for a white piece ('unicode').
     public King(Color color) {
+        //ternary operator (condition ? trueValue : falseValue). It checks if the color is Color.BLACK. 
+        //If it is, it sets the Unicode character for a black piece ('unicode'); otherwise, 
+        //it sets the Unicode character for a white piece ('unicode').
         super(color, color == Color.BLACK ? '\u265A' : '\u2654');
     }
 
