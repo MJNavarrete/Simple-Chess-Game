@@ -4,12 +4,18 @@ package PiecesPack;
 import java.awt.Color;
 
 public class King extends BasePiece{
-    //private String color;
-
+    
+    //ternary operator (condition ? trueValue : falseValue). It checks if the color is Color.BLACK. 
+    //If it is, it sets the Unicode character for a black piece ('unicode'); otherwise, 
+    //it sets the Unicode character for a white piece ('unicode').
     public King(Color color) {
         super(color, color == Color.BLACK ? '\u265A' : '\u2654');
     }
 
+    /**
+     * A king can move one square in any direction, so the method checks if the differences are 
+     * 1 or 0. If the move is valid, it returns true; otherwise, it returns false.
+     */
     @Override
     public boolean isValidMove(BasePiece[][] board, int fromRow, int fromCol, int toRow, int toCol) {
         int diffRow = Math.abs(toRow - fromRow);
