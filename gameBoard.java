@@ -124,7 +124,7 @@ public class gameBoard {
 
 
 
-     /**
+    /**
      * Handle mouse click method to handle when the user clicks on the board.
      *
      * @param clickedPanel The panel that was clicked
@@ -212,7 +212,10 @@ public class gameBoard {
      * Checks if the move of a piece is valid.
      */
     public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol) {
+        //This line retrieves the piece at the starting position 
+        //(fromRow, fromCol) on the game board (board).
         BasePiece piece = board[fromRow][fromCol];
+
         if (piece == null) {
             return false; // No piece at the starting position
         }
