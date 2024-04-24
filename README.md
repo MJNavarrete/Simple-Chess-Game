@@ -13,7 +13,7 @@ Martin Navarrete, ID: mjn52
 
 PROPER READ ME:
 
-THe simpleGameBoard.java is the main GUI where we also have the rules implemented and is the final (but not finished) product.
+The simpleGameBoard.java is the main GUI where we also have the rules implemented and is the final (but not finished) product.
 
 Test main is where we have the terminal version of the chess demo set up and that was for submission 1.
 
