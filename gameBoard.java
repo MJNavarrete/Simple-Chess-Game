@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import PiecesPack.BasePiece;
 import PiecesPack.Bishop;
 import PiecesPack.King;
@@ -91,7 +92,7 @@ public class gameBoard {
      * adding the panels to the gameboard JPanel 2d-array and setting it all visible.
      */
     public void createAndShowGUI() {
-        JFrame frame = new JFrame("Chess Game");
+        JFrame frame = new JFrame("The Coolest Chess Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridLayout(ROWS, COLS));
     
@@ -134,7 +135,7 @@ public class gameBoard {
         //to selectedSquare. e.g. square is clicked for the first time.
         if (selectedSquare == null) {
             selectedSquare = square;
-        } else {
+        } else { 
             // Check if the clicked square is the same as the selected square
             if (square == selectedSquare) {
                 return; // Do nothing if the same square is clicked again
@@ -147,7 +148,7 @@ public class gameBoard {
             int toCol = getCol(square);
 
     
-                // Check if the move is valid
+            // Check if the move is valid
             if (isValidMove(fromRow, fromCol, toRow, toCol)) {
                 // Move the piece visually
                 JLabel pieceLabel = (JLabel) selectedSquare.getComponent(0);
@@ -157,6 +158,7 @@ public class gameBoard {
                 selectedSquare.add(new JLabel()); // Empty the selected square
                 selectedSquare.repaint();
                 square.repaint();
+                JOptionPane.showMessageDialog(null, "Next Players Turn!");
 
                 // Move the piece in the board array
                 BasePiece piece = board[fromRow][fromCol];
@@ -217,7 +219,7 @@ public class gameBoard {
         BasePiece piece = board[fromRow][fromCol];
 
         if (piece == null) {
-            return false; // No piece at the starting position
+            return false; // If selected piece is null, don't do anything 
         }
 
         // Check if the destination is within the board bounds
